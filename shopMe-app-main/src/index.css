@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500&display=swap');
+
+
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+
+.paginate {
+    @apply flex lg:justify-end justify-center items-center my-6
+}
+
+.paginate li {
+    @apply w-12 h-12 border m-1 flex cursor-pointer 
+        hover:bg-black hover:text-white
+        justify-center items-center text-lg font-bold
+}
+@media (min-width: 640px) {
+    .sm\:text-6xl {
+        font-size: 3.75rem;
+        line-height: 1;
+        color: pink;
+    }
+}
