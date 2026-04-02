@@ -1,53 +1,58 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { removeFromFavorites } from '../redux/favoriteSlice';
+import { formatPrice } from '../utils/format';
+import StatusView from '../components/common/StatusView';
 
 const Favorite = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {favorites} = useSelector(state => state.favorites);
 
-
   if (!favorites || favorites.length === 0) {
     return (
       <div className='mt-10 min-h-screen'>
-        <div className='text-5xl font-extralight my-10 text-center'>
-          Favori Ürünlerim
+        <div className='my-10 text-center text-5xl font-extralight'>
+          Favori urunlerim
         </div>
-        <div className='text-xl text-gray-500 text-center font-semibold'>
-          Favori ürün bulunamadı.
-        </div>
+        <StatusView
+          title="Henuz favori urun eklemedin"
+          description="Begendigin urunleri favorilere ekleyerek daha sonra hizlica tekrar ulasabilirsin."
+          action={
+            <Link to="/" className='rounded-2xl bg-stone-900 px-5 py-3 text-sm font-bold text-white'>
+              Alisverise don
+            </Link>
+          }
+        />
       </div>
     );
   }
 
   return (
     <div className='my-10 min-h-screen'>
-      <div className='lg:text-5xl text-4xl font-extralight my-10 border-gray-300 text-center'>
-        Favori Ürünlerim
+      <div className='my-10 text-center text-4xl font-extralight lg:text-5xl'>
+        Favori urunlerim
       </div>
-      <div className='grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full lg:gap-8 gap-4'>
+      <div className='grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8'>
         {favorites?.map((item) => (
-          <div key={item.id} className='border border-gray-300 h-80 rounded-2xl p-4 relative'>
-            <div className='bg-black p-2 rounded-2xl text-white inline-block 
-              absolute top-0 right-0 text-xl font-semibold'>
-              {item?.price} TL
+          <div key={item.id} className='relative h-80 rounded-[28px] border border-stone-200 bg-white p-4 shadow-sm'>
+            <div className='absolute top-0 right-0 inline-block rounded-2xl bg-black p-2 text-xl font-semibold text-white'>
+              {formatPrice(item?.price)}
             </div>
             <div className='flex items-center justify-center p-4'>
-                <img src={item.image} alt='' className='h-[180px] object-contain' />
+                <img src={item.image} alt={item.title} className='h-[180px] object-contain' />
             </div>
             <div>
                 <div className='text-center font-semibold'>{(item?.title).substring(0,30)}...</div>
-                <div className='flex gap-2 my-2'>
-                  <button className='bg-gray-200 w-full p-2 rounded-xl cursor-pointer'
+                <div className='my-2 flex gap-2'>
+                  <button className='w-full rounded-xl bg-gray-200 p-2 cursor-pointer'
                     onClick={() => navigate(`/products/${item.id}`)}>
-                    İncele
+                    Incele
                   </button>
-                  <button className='bg-red-500 text-white p-2 cursor-pointer rounded-xl'
+                  <button className='rounded-xl bg-red-500 p-2 text-white cursor-pointer'
                     onClick={() => dispatch(removeFromFavorites(item?.id))}>
-                    Kaldır
+                    Kaldir
                   </button>
                 </div>
             </div>

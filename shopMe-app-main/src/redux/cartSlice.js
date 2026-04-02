@@ -32,11 +32,9 @@ const cartSlice = createSlice({
               const tempCart = state.carts.map(item => {
                 if (item.id === action.payload.id) {
                   let tempQty = item.quantity + action.payload.quantity;
-                  let tempTotalPrice = item.totalPrice + action.payload.totalPrice;
                   return {
                     ...item,
                     quantity: tempQty,
-                    totalPrice: tempTotalPrice
                   };
                 } else {
                   return item;
@@ -54,6 +52,21 @@ const cartSlice = createSlice({
         removeFromCart: (state, action) => {
             const tempCart = state.carts.filter(item => item.id !== action.payload);
             state.carts = tempCart;
+            storeInLocalStorage(state.carts);
+        },
+
+        increaseQuantity: (state, action) => {
+            state.carts = state.carts.map((item) =>
+                item.id === action.payload ? { ...item, quantity: item.quantity + 1 } : item
+            );
+            storeInLocalStorage(state.carts);
+        },
+
+        decreaseQuantity: (state, action) => {
+            state.carts = state.carts
+                .map((item) =>
+                    item.id === action.payload ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
+                );
             storeInLocalStorage(state.carts);
         },
 
@@ -78,6 +91,6 @@ const cartSlice = createSlice({
 })
 
 
-export const {addToCart,removeFromCart,clearCart,getCartTotal,getCartTotalItems} = cartSlice.actions;
+export const {addToCart,removeFromCart,increaseQuantity,decreaseQuantity,clearCart,getCartTotal,getCartTotalItems} = cartSlice.actions;
 
 export default cartSlice.reducer;

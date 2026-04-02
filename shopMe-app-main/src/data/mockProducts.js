@@ -1,0 +1,98 @@
+export const mockProducts = [
+    {
+        id: 1,
+        title: "Modern Kahve Makinesi",
+        price: 2499,
+        description: "Hızlı demleme yapan, kompakt tasarımlı ve günlük kullanıma uygun kahve makinesi.",
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.6,
+            count: 18,
+        },
+    },
+    {
+        id: 2,
+        title: "Kablosuz Bluetooth Kulaklık",
+        price: 1799,
+        description: "Gürültü engelleme destekli, uzun pil ömürlü ve rahat kullanım sunan kulaklık.",
+        category: "electronics",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.4,
+            count: 24,
+        },
+    },
+    {
+        id: 3,
+        title: "Klasik Beyaz T-Shirt",
+        price: 399,
+        description: "Yumuşak dokulu pamuklu kumaştan üretilmiş, günlük kombinlere uygun beyaz t-shirt.",
+        category: "men's clothing",
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.1,
+            count: 42,
+        },
+    },
+    {
+        id: 4,
+        title: "Siyah Oversize Hoodie",
+        price: 899,
+        description: "Serin havalarda rahatlık sağlayan, yumuşak iç dokulu oversize hoodie.",
+        category: "men's clothing",
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.7,
+            count: 31,
+        },
+    },
+    {
+        id: 5,
+        title: "Minimal Altın Kolye",
+        price: 1299,
+        description: "Şık ve sade görünümüyle günlük kullanım için tasarlanmış altın renkli kolye.",
+        category: "jewelery",
+        image: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.8,
+            count: 12,
+        },
+    },
+    {
+        id: 6,
+        title: "Taş Detaylı Bileklik",
+        price: 749,
+        description: "Günlük ve özel kombinlerde kullanılabilecek zarif taş detaylı bileklik.",
+        category: "jewelery",
+        image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.3,
+            count: 16,
+        },
+    },
+    {
+        id: 7,
+        title: "Kadın Bej Trençkot",
+        price: 1899,
+        description: "Mevsim geçişlerinde kullanılabilecek hafif yapılı ve modern kesimli trençkot.",
+        category: "women's clothing",
+        image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.5,
+            count: 21,
+        },
+    },
+    {
+        id: 8,
+        title: "Kadın Omuz Çantası",
+        price: 999,
+        description: "Geniş iç hacmi ve sade çizgisiyle günlük kullanıma uygun omuz çantası.",
+        category: "women's clothing",
+        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+        rating: {
+            rate: 4.2,
+            count: 27,
+        },
+    },
+];

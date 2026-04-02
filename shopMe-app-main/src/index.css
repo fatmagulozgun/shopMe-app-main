@@ -2,28 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;700;800;900&display=swap');
 
+/* Theme tokens */
+:root {
+    --text: #1c1917;
+    --bg-start: #fafaf9;
+    --bg-end: #ffffff;
+    --ring: #1f2937; /* stone-800 */
+    --ring-soft: rgba(31, 41, 55, 0.25);
+}
 
+/* Sensible defaults */
+html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(1000px circle at 10% 0%, rgba(17, 24, 39, 0.06) 0%, rgba(17, 24, 39, 0) 45%),
+        radial-gradient(900px circle at 90% 10%, rgba(17, 24, 39, 0.04) 0%, rgba(17, 24, 39, 0) 50%),
+        linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
 }
 
+#root {
+    min-height: 100vh;
+}
+
+/* Selection */
+::selection {
+    background: rgba(31, 41, 55, 0.18);
+}
+
+::selection {
+    background: rgba(31, 41, 55, 0.18);
+}
+
+html ::selection {
+    background: rgba(31, 41, 55, 0.18);
+}
+
+/* Typography defaults */
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Better focus for keyboard users */
+:where(a, button, input, textarea, select, summary, [role="button"], [tabindex]):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 14px;
+}
+
+/* Scrollbar (Chromium + Safari) */
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(31, 41, 55, 0.22);
+    border: 2px solid transparent;
+    background-clip: content-box;
+    border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(31, 41, 55, 0.32);
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Toasts: match the app theme */
+.Toastify__toast {
+    border-radius: 18px !important;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Existing toastify theme uses colored toasts, but soften the surface */
+.Toastify__toast-body {
+    line-height: 1.35 !important;
+}
+
+.slick-dots li button:before {
+    color: #292524 !important;
+}
 
 .paginate {
-    @apply flex lg:justify-end justify-center items-center my-6
+    @apply mt-8 flex items-center justify-center gap-2 lg:justify-end;
 }
 
 .paginate li {
-    @apply w-12 h-12 border m-1 flex cursor-pointer 
-        hover:bg-black hover:text-white
-        justify-center items-center text-lg font-bold
+    @apply m-1 flex h-11 w-11 cursor-pointer items-center justify-center rounded-2xl border border-stone-300 bg-white text-base font-bold shadow-sm transition hover:shadow-md hover:border-stone-900 hover:bg-stone-900 hover:text-white focus-visible:outline-none;
 }
-@media (min-width: 640px) {
-    .sm\:text-6xl {
-        font-size: 3.75rem;
-        line-height: 1;
-        color: pink;
-    }
+
+.paginate .selected {
+    @apply border-stone-900 bg-stone-900 text-white shadow-md;
 }

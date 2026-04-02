@@ -1,29 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../utils/status";
+import { fetchJson } from "../utils/api";
 
 const initialState = {
     products: [],
     productsStatus: STATUS.IDLE,
+    productsError: null,
     productDetail: [],
     productDetailStatus: STATUS.IDLE,
+    productDetailError: null,
 }
 
 export const getProducts = createAsyncThunk('getProducts', async () => {
-    const response = await fetch("https://fakestoreapi.com/products");
-    const data = response.json();
-    return data;
+    return fetchJson("/products");
 })  
 
 export const getDetailProduct = createAsyncThunk('getCategory', async (id) => {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-    const data = response.json();
-    return data;
+    return fetchJson(`/products/${id}`);
 }) 
 
 export const getCategoryProducts = createAsyncThunk('getProduct', async (category) => {
-    const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
-    const data = response.json();
-    return data;
+    return fetchJson(`/products/category/${category}`);
 }) 
 
 const productSlice = createSlice({
@@ -34,6 +31,7 @@ const productSlice = createSlice({
         builder
             .addCase(getProducts.pending, (state, action) => {
                 state.productsStatus = STATUS.LOADING
+                state.productsError = null;
             })
             .addCase(getProducts.fulfilled, (state, action) => {
                 state.productsStatus = STATUS.SUCCESS;
@@ -41,9 +39,11 @@ const productSlice = createSlice({
             })
             .addCase(getProducts.rejected, (state, action) => {
                 state.productsStatus = STATUS.FAIL
+                state.productsError = action.error.message;
             })
             .addCase(getDetailProduct.pending, (state, action) => {
                 state.productDetailStatus = STATUS.LOADING
+                state.productDetailError = null;
             })
             .addCase(getDetailProduct.fulfilled, (state, action) => {
                 state.productDetailStatus = STATUS.SUCCESS;
@@ -51,9 +51,11 @@ const productSlice = createSlice({
             })
             .addCase(getDetailProduct.rejected, (state, action) => {
                 state.productDetailStatus = STATUS.FAIL
+                state.productDetailError = action.error.message;
             })
             .addCase(getCategoryProducts.pending, (state, action) => {
                 state.productsStatus = STATUS.LOADING
+                state.productsError = null;
             })
             .addCase(getCategoryProducts.fulfilled, (state, action) => {
                 state.productsStatus = STATUS.SUCCESS;
@@ -61,6 +63,7 @@ const productSlice = createSlice({
             })
             .addCase(getCategoryProducts.rejected, (state, action) => {
                 state.productsStatus = STATUS.FAIL
+                state.productsError = action.error.message;
             })
     }
 })

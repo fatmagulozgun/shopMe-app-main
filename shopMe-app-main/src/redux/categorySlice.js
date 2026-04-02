@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchJson } from "../utils/api";
+
+import { STATUS } from "../utils/status";
 
 const initialState = {
-    categories: []
+    categories: [],
+    categoriesStatus: STATUS.IDLE,
 }
 
 
 export const getCategories = createAsyncThunk("category", async() => {
-    const response = await fetch("https://fakestoreapi.com/products/categories");
-    const data = response.json();
-    return data;
+    return fetchJson("/products/categories");
 })
 
 const categorySlice = createSlice({
@@ -18,7 +20,14 @@ const categorySlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getCategories.fulfilled, (state, action) => {
+                state.categoriesStatus = STATUS.SUCCESS;
                 state.categories = action.payload;
+            })
+            .addCase(getCategories.pending, (state) => {
+                state.categoriesStatus = STATUS.LOADING;
+            })
+            .addCase(getCategories.rejected, (state) => {
+                state.categoriesStatus = STATUS.FAIL;
             })
     }
 })

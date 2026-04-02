@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const NavbarLeft = () => {
   return (
-    <Link to={"/"} className='sm:text-6xl text-3xl font-semibold'>
+    <Link to={"/"} className='text-3xl font-black tracking-tight text-stone-900 sm:text-5xl'>
         EasyShop
     </Link>
   )
