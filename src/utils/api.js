@@ -1,6 +1,10 @@
 import { getMockResponse } from "./mockApi";
 
-const API_BASE_URL = "/api";
+// CRA (React-scripts) development'ta `src/setupProxy.js` ile `/api` proxylenir,
+// ancak production build'te bu mekanizma çalışmaz. Bu yüzden base URL'i
+// gerçek API host'u yapıyoruz (Vercel'de env ile override edilebilir).
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL || "https://fakestoreapi.com";
 
 export async function fetchJson(path) {
     try {
